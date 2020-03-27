@@ -22,6 +22,7 @@ message AccessCheckResponse {
 message User {
     string userId = 1;
     repeated string groups = 2;
+    repeated string roles = 3;
 }
 
 message Group {
