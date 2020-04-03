@@ -10,7 +10,7 @@ service AuthService {
 message AccessCheckRequest {
     string userId = 1;
     string privilege = 2;
-    string namespace = 3;
+    string path = 3;
     string valuation = 4;
     string state = 5;
 }
