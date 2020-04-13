@@ -82,6 +82,7 @@ message Role {
         OUTPUT = 3;
         PRODUCT = 4;
         OTHER = 5;
+        TEMP = 6;
     }
     repeated DatasetState states = 9;
 }
