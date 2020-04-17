@@ -10,7 +10,7 @@ service AuthService {
 message AccessCheckRequest {
     string userId = 1;
     string privilege = 2;
-    string namespace = 3;
+    string path = 3;
     string valuation = 4;
     string state = 5;
 }
@@ -19,93 +19,63 @@ message AccessCheckResponse {
     bool allowed = 1;
 }
 
-service UserService {
-    rpc getUser (UserGetRequest) returns (UserGetResponse);
-    rpc putUser (UserPutRequest) returns (UserPutResponse);
-    rpc deleteUser (UserDeleteRequest) returns (UserDeleteResponse);
-}
-
 message User {
     string userId = 1;
-    repeated string roles = 2;
+    repeated string groups = 2;
+    repeated string roles = 3;
 }
 
-message UserGetRequest {
-    string userId = 1;
+message Group {
+    string groupId = 1;
+    string description = 2;
+    repeated string roles = 3;
 }
 
-message UserGetResponse {
-    User user = 1;
+enum Privilege {
+    READ = 0;
+    CREATE = 1;
+    UPDATE = 2;
+    DELETE = 3;
 }
 
-message UserPutRequest {
-    User user = 1;
+enum Valuation {
+    OPEN = 0;
+    INTERNAL = 3;
+    SHIELDED = 6;
+    SENSITIVE = 9;
 }
 
-message UserPutResponse {
-}
-
-message UserDeleteRequest {
-    string userId = 1;
-}
-
-message UserDeleteResponse {
-}
-
-service RoleService {
-    rpc getRole (RoleGetRequest) returns (RoleGetResponse);
-    rpc putRole (RolePutRequest) returns (RolePutResponse);
-    rpc deleteRole (RoleDeleteRequest) returns (RoleDeleteResponse);
+enum DatasetState {
+    RAW = 0;
+    INPUT = 1;
+    PROCESSED = 2;
+    OUTPUT = 3;
+    PRODUCT = 4;
+    OTHER = 5;
+    TEMP = 6;
 }
 
 message Role {
     string roleId = 1;
-    enum Privilege {
-        READ = 0;
-        CREATE = 1;
-        UPDATE = 2;
-        DELETE = 3;
-    }
-    repeated Privilege privileges = 3;
-    repeated string namespacePrefixes = 5;
-    enum Valuation {
-        OPEN = 0;
-        INTERNAL = 3;
-        SHIELDED = 6;
-        SENSITIVE = 9;
-    }
+    string description = 2;
+    PrivilegeSet privileges = 3;
+    PathSet paths = 5;
     Valuation maxValuation = 7;
-    enum DatasetState {
-        RAW = 0;
-        INPUT = 1;
-        PROCESSED = 2;
-        OUTPUT = 3;
-        PRODUCT = 4;
-        OTHER = 5;
-        TEMP = 6;
-    }
-    repeated DatasetState states = 9;
+    DatasetStateSet states = 9;
 }
 
-message RoleGetRequest {
-    string roleId = 1;
+message PrivilegeSet {
+    repeated Privilege includes = 1;
+    repeated Privilege excludes = 2;
 }
 
-message RoleGetResponse {
-    Role role = 1;
+message DatasetStateSet {
+    repeated DatasetState includes = 1;
+    repeated DatasetState excludes = 2;
 }
 
-message RolePutRequest {
-    Role role = 1;
-}
-
-message RolePutResponse {
-}
-
-message RoleDeleteRequest {
-    string roleId = 1;
-}
-
-message RoleDeleteResponse {
+message PathSet {
+    repeated string includes = 1;
+    repeated string excludes = 2;
 }
 
