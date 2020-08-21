@@ -54,6 +54,8 @@ jobs:
 
       #Maven caching to speed up pipeline build time
       - template: maven/task-cache.yml@templates
+      condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+      - template: maven/task-install-and-deploy-to-nexus.yml@templates
 
       # Deploy artifact to Nexus
   - job: 'installDeploy'
