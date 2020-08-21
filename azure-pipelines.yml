@@ -59,4 +59,5 @@ jobs:
   - job: 'installDeploy'
     displayName: 'deploy app'
     condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
-    template: maven/task-install-and-deploy-to-nexus.yml@templates
+    steps:
+      - template: maven/task-install-and-deploy-to-nexus.yml@templates
