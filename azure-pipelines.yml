@@ -56,4 +56,6 @@ jobs:
       - template: maven/task-cache.yml@templates
 
       # Deploy artifact to Nexus
+      steps:
+        condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
       - template: maven/task-install-and-deploy-to-nexus.yml@templates
