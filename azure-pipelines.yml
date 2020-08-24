@@ -41,16 +41,14 @@ variables:
 jobs:
   - job: buildTest
     displayName: 'compile deploy app'
+    container: ${{ parameters.mavenContainer }}
     # Job condition: Run these jobs on any branch, but not on tags
     condition: not(startsWith(variables['Build.SourceBranch'], 'refs/tags/'))
     # Steps in this Job
     steps:
       # Authenticate Maven to Nexus using predefined Service Connections
       # (Project Settings->Pipelines->Service Connections)
-      - task: MavenAuthenticate@0
-        displayName: 'Maven authenticate'
-        inputs:
-          mavenServiceConnections: 'mvnSsbBipPublic, mvnSsbBipReleases, mvnSsbBipSnapshots'
+      - template: maven/task-authenticate.yml@templates
 
       #Maven caching to speed up pipeline build time
       - template: maven/task-cache.yml@templates
