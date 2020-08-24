@@ -1,5 +1,9 @@
 name: $(Build.SourceBranch)-$(date:yyyyMMdd)$(rev:.r)
 # Pipeline triggers on any branch and tag
+parameters:
+  - name: 'mavenContainer'
+  - default: 'maven:3-jdk-11'
+
 trigger:
   branches:
     include:
@@ -16,7 +20,7 @@ resources:
   - repository: templates
     type: github
     name: statisticsnorway/azure-pipelines-templates
-    ref: refs/tags/0.0.5
+    ref: refs/tags/0.0.7
     endpoint: statisticsnorway (6)
 
 # Pipeline will be run on this base image
