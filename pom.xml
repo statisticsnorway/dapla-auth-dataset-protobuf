@@ -3,7 +3,7 @@
 
     <groupId>no.ssb.dapla.auth.dataset</groupId>
     <artifactId>dapla-auth-dataset-protobuf</artifactId>
-    <version>0.7</version>
+    <version>0.8-SNAPSHOT</version>
     <packaging>multi-release-jar</packaging>
     <name>${project.artifactId}</name>
 
@@ -23,7 +23,7 @@
         <connection>scm:git:git://github.com/statisticsnorway/dapla-auth-dataset-protobuf.git</connection>
         <developerConnection>scm:git:git@github.com:statisticsnorway/dapla-auth-dataset-protobuf.git</developerConnection>
         <url>https://github.com/statisticsnorway/dapla-auth-dataset-protobuf</url>
-        <tag>dapla-auth-dataset-protobuf-0.7</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <dependencies>
