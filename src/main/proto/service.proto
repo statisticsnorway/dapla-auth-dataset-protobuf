@@ -36,6 +36,7 @@ enum Privilege {
     CREATE = 1;
     UPDATE = 2;
     DELETE = 3;
+    DEPSEUDO = 4;
 }
 
 enum Valuation {
